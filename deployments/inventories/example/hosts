@@ -1,0 +1,6 @@
+
+[test:children]
+zabbix-api
+
+[zabbix-api]
+zabbix-api ansible_connection=local

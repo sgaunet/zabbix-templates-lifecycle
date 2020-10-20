@@ -1,0 +1,8 @@
+---
+- name: Dump templates in source code
+  hosts: zabbix-api
+  gather_facts: no
+  vars:
+    - version : "2019-12-05T00:00:00Z"
+  roles:
+    - roles/save-tmpl-JSON

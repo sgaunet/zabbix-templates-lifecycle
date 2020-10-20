@@ -1,0 +1,6 @@
+---
+- name: Dump templates in source code
+  hosts: zabbix-api
+  gather_facts: no
+  roles:
+    - roles/add-templates

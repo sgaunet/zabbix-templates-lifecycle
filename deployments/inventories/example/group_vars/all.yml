@@ -1,0 +1,8 @@
+---
+
+zabbix_server: <dns or IP of zabbix server>
+
+user_zabbix: <use with admin privilege on zabbix (http interface)>
+mdp_zabbix: <password>
+
+url_zabbix: "http://zabbix.domain.com/zabbix"

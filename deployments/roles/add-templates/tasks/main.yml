@@ -1,0 +1,10 @@
+- name: Import Zabbix templates from JSON
+  local_action:
+    module: zabbix_template
+    server_url: "{{ url_zabbix }}"
+    login_user: "{{ user_zabbix }}"
+    login_password: "{{ mdp_zabbix }}"
+    template_json: "{{ lookup('file', '{{ item }}'  ) }}"
+    state: present
+  with_fileglob:
+    - "files/*"

@@ -1,0 +1,28 @@
+- name: Dump Zabbix template
+  local_action:
+    module: zabbix_template
+    server_url: "{{ url_zabbix }}"
+    login_user: "{{ user_zabbix }}"
+    login_password: "{{ mdp_zabbix }}"
+    template_name: "{{ item }}"
+    dump_format: json
+    state: dump
+  register: template_dump
+  ignore_errors: yes
+  with_items :
+    - "APP1 - frontend"
+    - "APP2"
+   
+# - debug:
+#     var: template_dump
+
+- local_action: copy content={{ item.template_json  | to_nice_json  }} dest="{{ role_path }}/../add-templates/files/{{ item.item }}.json"
+  with_items: "{{ template_dump.results }}"
+
+- name: Replace Date field by the one declared in playbook !
+  lineinfile:
+    path: "{{ item }}"
+    regexp: '        "date": "(.*)T(.*)Z",'
+    line: '        "date": "{{ version }}",'
+  with_fileglob:
+    - "{{ role_path }}/../add-templates/files/*"
